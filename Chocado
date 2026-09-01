@@ -18,8 +18,8 @@ local LOOK_THRESHOLD = 0.65
 --// only once per executor/session
 getgenv().HungryBadgeGiven = getgenv().HungryBadgeGiven or false
 
---// LOAD MODEL
-local fileName = "shockerasdasdasd.rbxm"
+--// LOAD MODEL (Atualizado com o novo link e nome)
+local fileName = "choavd.rbxm"
 
 if not isfile(fileName) then
 	writefile(
@@ -106,9 +106,6 @@ local function IsLookingAtEntity()
 	return false
 end
 
---// ACHIEVEMENT
-
-
 --// DESPAWN
 local function DespawnEntity(giveBadge)
 	if state == "dead" then
@@ -127,7 +124,6 @@ local function DespawnEntity(giveBadge)
 	local badgeDone = false
 	local parentConn
 
-	--// badge fires EXACTLY when entity leaves workspace
 	if giveBadge then
 		parentConn = entity.AncestryChanged:Connect(function(_, parent)
 			if parent == nil and not badgeDone then
@@ -136,8 +132,6 @@ local function DespawnEntity(giveBadge)
 				if parentConn then
 					parentConn:Disconnect()
 				end
-
-				GiveShockerBadge()
 			end
 		end)
 	end
@@ -151,17 +145,6 @@ local function DespawnEntity(giveBadge)
 
 	if entity and entity.Parent then
 		entity:Destroy()
-	end
-
-	--// fallback safety
-	if giveBadge and entity.Parent == nil and not badgeDone then
-		badgeDone = true
-
-		if parentConn then
-			parentConn:Disconnect()
-		end
-
-		GiveShockerBadge()
 	end
 end
 
@@ -187,7 +170,6 @@ local function Attack()
 	humanoid:TakeDamage(DAMAGE)
 	scream:Play()
 
-	--// CAMERA SHAKE
 	local original = camera.CFrame
 	local duration = 0.8
 	local start = tick()
@@ -218,7 +200,6 @@ local function Attack()
 
 	camera.CFrame = original
 
-	--// CHANGED: Now passes true so you get the badge when attacked
 	DespawnEntity(true)
 end
 
@@ -246,4 +227,3 @@ task.delay(ATTACK_DELAY, function()
 		DespawnEntity(true)
 	end
 end)
-
