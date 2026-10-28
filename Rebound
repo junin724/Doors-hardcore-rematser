@@ -105,23 +105,20 @@ function Move()
     customPreSound.Name = "ReboundCustomPre"
     customPreSound.Volume = 3
     customPreSound.RollOffMinDistance = 5
-    customPreSound.RollOffMaxDistance = 1000
+    customPreSound.RollOffMaxDistance = 500
     customPreSound.Parent = entity
 
-    local distortion = Instance.new("DistortionSoundEffect")
-    distortion.Level = 0.5
-    distortion.Parent = customPreSound
 
     task.spawn(function()
         customPreSound.SoundId = GitAud("https://github.com/junin724/Custom-Sounds/raw/refs/heads/main/ReboundComing.mp3.mpeg%20%281%29.mp3", "ReboundCustomPre")
     end)
 
-    task.wait(3.5)
+    task.wait(4)
 
     local preMoveSound = Instance.new("Sound")
     preMoveSound.Name = "PreMoveSound"
     preMoveSound.SoundId = "rbxassetid://9114221327"
-    preMoveSound.Volume = 2
+    preMoveSound.Volume = 1.7
     preMoveSound.Parent = workspace
     preMoveSound:Play()
     game.Debris:AddItem(preMoveSound, 3)
@@ -131,7 +128,7 @@ function Move()
     end
     game.Debris:AddItem(customPreSound, 12)
 
-    task.wait(0.5)
+    task.wait(1)
 
     task.spawn(function()
         while entity and entity.Parent do 
